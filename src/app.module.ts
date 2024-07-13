@@ -7,6 +7,8 @@ import { User } from './user/entities/user.entity';
 import { TestModule } from './test/test.module';
 import { UserModule } from './user/user.module';
 import { AuthModule } from './auth/auth.module';
+import { VehicleModule } from './vehicle/vehicle.module';
+import { Vehicle } from './vehicle/entities/vehicle.entity';
 
 @Module({
   imports: [
@@ -20,11 +22,11 @@ import { AuthModule } from './auth/auth.module';
       password: process.env.DB_PASSWORD,
       autoLoadEntities: true,
       synchronize: true,
-      entities: [User]      
+      entities: [User,Vehicle]      
     }),
     TestModule,    
     UserModule, 
-    AuthModule
+    AuthModule, VehicleModule
   ],
   controllers: [AppController],
   providers: [AppService],

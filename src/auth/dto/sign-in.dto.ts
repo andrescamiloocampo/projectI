@@ -1,8 +1,9 @@
 import { IsString, IsUUID, MinLength } from "class-validator";
 
-export class SignInDto {
-    @IsUUID()    
-    id: string;    
+export class SignInDto {    
+    
+    @IsString()
+    username: string;    
 
     @IsString()
     @MinLength(8)

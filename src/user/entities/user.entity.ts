@@ -1,4 +1,5 @@
-import { Entity,Column,PrimaryGeneratedColumn } from "typeorm";
+import { Vehicle } from "src/vehicle/entities/vehicle.entity";
+import { Entity,Column,PrimaryGeneratedColumn, OneToMany } from "typeorm";
 
 @Entity()
 export class User {
@@ -6,9 +7,13 @@ export class User {
     id: string;
 
     @Column('text',{
-      nullable: false   
+      nullable: false,
+      unique: true  
     })
     username: string;
+
+    @Column('text')
+    firstName: string;
 
     @Column('text')
     lastName: string;
@@ -18,4 +23,11 @@ export class User {
 
     @Column('text')
     password: string;
+
+    @OneToMany(
+      () => Vehicle,
+      vehicle => vehicle.user,
+      {cascade: true, eager: true}
+    )
+    vehicles: Vehicle[]
 }

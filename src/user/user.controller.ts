@@ -21,16 +21,18 @@ export class UserController {
     return this.userService.findAll();
   }
 
-  @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.userService.findOne(id);
+  @Get(':username')
+  async findOne(@Param('username') username: string) {
+    const user = this.userService.findOneByUsername(username);        
+    return user;
   }
 
+  @UseGuards(AuthGuard)
   @Delete(':id')
   remove(@Param('id') id: string) {
     return this.userService.remove(+id);
   }
-
+  
   @Post()
   async create(@Body() createUserDto:CreateUserDto){
     return this.userService.create(createUserDto)
