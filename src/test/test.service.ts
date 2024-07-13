@@ -21,6 +21,6 @@ export class TestService {
   }
 
   remove(id: number) {
-    return `This action removes a #${id} test`;
+    return `This action reaaaaaaaa #${id} test`;
   }
 }
