@@ -9,6 +9,7 @@ import { UserModule } from './user/user.module';
 import { AuthModule } from './auth/auth.module';
 import { VehicleModule } from './vehicle/vehicle.module';
 import { Vehicle } from './vehicle/entities/vehicle.entity';
+import { PredictionModule } from './prediction/prediction.module';
 
 @Module({
   imports: [
@@ -26,7 +27,7 @@ import { Vehicle } from './vehicle/entities/vehicle.entity';
     }),
     TestModule,    
     UserModule, 
-    AuthModule, VehicleModule
+    AuthModule, VehicleModule, PredictionModule
   ],
   controllers: [AppController],
   providers: [AppService],
