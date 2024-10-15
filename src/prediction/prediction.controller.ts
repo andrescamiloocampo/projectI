@@ -1,4 +1,4 @@
-import { Controller, Get } from '@nestjs/common';
+import { Body, Controller, Get, Post } from '@nestjs/common';
 import { PredictionService } from './prediction.service';
 import { UseGuards } from '@nestjs/common';
 import { AuthGuard } from 'src/auth/auth.guard';
@@ -11,5 +11,10 @@ export class PredictionController {
   @Get()
   async findAll() {
     return await this.predictionService.consumeModel();
+  }
+
+  @Post()
+  async predict(@Body() body: any){
+    return await this.predictionService.prediction(body);
   }
 }
