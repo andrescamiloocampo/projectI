@@ -24,11 +24,13 @@ export class UserService {
   }
 
   async findOneByUsername(username: string): Promise<any> {
-    const user = this.userRepository.findOneBy({username});
-    const resp = await user
-    if(!resp) return null;
-    return user;
+    const user = await this.userRepository.findOneBy({ username }); // Espera la promesa
+    if (!user) return null;
+  
+    const { password, ...userResp } = user; // Desestructura el resultado
+    return userResp; 
   }
+  
 
   async create(createUserDto:CreateUserDto){
     const {password,...userData} = createUserDto
