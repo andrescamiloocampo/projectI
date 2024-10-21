@@ -3,13 +3,11 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { User } from './user/entities/user.entity';
 import { TestModule } from './test/test.module';
 import { UserModule } from './user/user.module';
 import { AuthModule } from './auth/auth.module';
-import { VehicleModule } from './vehicle/vehicle.module';
-import { Vehicle } from './vehicle/entities/vehicle.entity';
 import { PredictionModule } from './prediction/prediction.module';
+import { User,File,Location } from './user/entities';
 
 @Module({
   imports: [
@@ -23,11 +21,11 @@ import { PredictionModule } from './prediction/prediction.module';
       password: process.env.DB_PASSWORD,
       autoLoadEntities: true,
       synchronize: true,
-      entities: [User,Vehicle]      
+      entities: [User,File,Location]      
     }),
     TestModule,    
     UserModule, 
-    AuthModule, VehicleModule, PredictionModule
+    AuthModule, PredictionModule
   ],
   controllers: [AppController],
   providers: [AppService],
