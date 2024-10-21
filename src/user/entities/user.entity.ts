@@ -1,6 +1,6 @@
-import { Vehicle } from "src/vehicle/entities/vehicle.entity";
-import { Entity,Column,PrimaryGeneratedColumn, OneToMany } from "typeorm";
 
+import { Entity,Column,PrimaryGeneratedColumn, OneToMany, OneToOne, ManyToOne } from "typeorm";
+import { File,Location } from './'
 @Entity()
 export class User {
     @PrimaryGeneratedColumn('uuid')
@@ -12,11 +12,20 @@ export class User {
     })
     username: string;
 
+    @Column('text',{
+      nullable: false,
+      unique: true  
+    })
+    email: string;
+
     @Column('text')
     firstName: string;
 
     @Column('text')
     lastName: string;
+
+    @Column('numeric')
+    creationDate: number;
 
     @Column({default: true})    
     isActive: boolean;    
@@ -24,10 +33,19 @@ export class User {
     @Column('text')
     password: string;
 
-    @OneToMany(
-      () => Vehicle,
-      vehicle => vehicle.user,
-      {cascade: true, eager: true}
+
+    @ManyToOne(
+      () => File,
+      file => file.user,
+      {cascade: false,nullable:true , eager: false}
     )
-    vehicles: Vehicle[]
-}
+    file?: File
+
+    @ManyToOne(
+      () => Location,
+      location => location.user,
+      {cascade: false, eager: false}
+    )
+    location: Location
+ }
+

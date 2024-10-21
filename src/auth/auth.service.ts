@@ -19,7 +19,7 @@ export class AuthService {
         message: 'User not found'
       }
     }
-
+  console.log(user)
     if(!bcrypt.compareSync(pass,user.password))
       throw new UnauthorizedException()
 
