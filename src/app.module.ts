@@ -7,7 +7,7 @@ import { TestModule } from './test/test.module';
 import { UserModule } from './user/user.module';
 import { AuthModule } from './auth/auth.module';
 import { PredictionModule } from './prediction/prediction.module';
-import { User,File,Location } from './user/entities';
+import { User,File,Location,Prediction } from './user/entities';
 
 @Module({
   imports: [
@@ -21,7 +21,7 @@ import { User,File,Location } from './user/entities';
       password: process.env.DB_PASSWORD,
       autoLoadEntities: true,
       synchronize: true,
-      entities: [User,File,Location]      
+      entities: [User,File,Location,Prediction]      
     }),
     TestModule,    
     UserModule, 

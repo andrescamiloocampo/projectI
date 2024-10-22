@@ -1,16 +1,28 @@
-import { Injectable } from '@nestjs/common';
-
+import { Injectable, PreconditionFailedException } from '@nestjs/common';
+import { Prediction } from './entities/prediction.entity';
+import { InjectRepository, } from '@nestjs/typeorm';
+import { Repository } from 'typeorm';
+import { CreatePredictionDto } from './dto';
+import { v4 as uuid } from 'uuid';
 @Injectable()
 export class PredictionService {
+
+  constructor(
+    @InjectRepository(Prediction)
+    private readonly predictionRepository: Repository<Prediction>
+  ) { }
+
   async consumeModel() {
     const data = await getPrediction();
     return data;
+
   }
 
   async prediction(body: any) {
     const data = await predictionPost(body);
     return data;
   }
+
 }
 
 const getPrediction = async (): Promise<any> => {
@@ -20,7 +32,7 @@ const getPrediction = async (): Promise<any> => {
       {
         headers: {
           'Content-Type': 'application/json',
-        }        
+        }
       },
     );
     if (!response.ok) {
@@ -53,4 +65,6 @@ const predictionPost = async (body: any): Promise<any> => {
   } catch (error) {
     return { success: false, data: error };
   }
+
 };
+

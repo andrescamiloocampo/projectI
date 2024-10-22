@@ -1,6 +1,6 @@
 
 import { Entity,Column,PrimaryGeneratedColumn, OneToMany, OneToOne, ManyToOne } from "typeorm";
-import { File,Location } from './'
+import { File,Location, Prediction } from './'
 @Entity()
 export class User {
     @PrimaryGeneratedColumn('uuid')
@@ -34,18 +34,27 @@ export class User {
     password: string;
 
 
-    @ManyToOne(
+    @ManyToOne(                           //TODO: should be OneToOne Relation
       () => File,
       file => file.user,
       {cascade: false,nullable:true , eager: false}
     )
     file?: File
 
-    @ManyToOne(
+    @ManyToOne(                         //TODO: should be OneToOne Relation
       () => Location,
       location => location.user,
       {cascade: false, eager: false}
     )
-    location: Location
+    location?: Location
+
+    @OneToMany(                      //TODO: should be OneToOne Relation
+      () => Prediction,
+      prediction => prediction.user,
+      {cascade: false, eager: false}
+    )
+    prediction?: Prediction[]
+
+
  }
 

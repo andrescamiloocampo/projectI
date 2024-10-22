@@ -5,6 +5,7 @@ import {
   Delete,
   Post,
   Body,
+  Put,
   UseGuards,
 } from '@nestjs/common';
 import { UserService } from './user.service';
@@ -36,5 +37,12 @@ export class UserController {
   @Post()
   async create(@Body() createUserDto:CreateUserDto){
     return this.userService.create(createUserDto)
+  }
+
+  @Put(':id')
+  async updatePrediction(@Param('id') id:string){
+    
+    return this.userService.addPrediction(id)
+
   }
 }
