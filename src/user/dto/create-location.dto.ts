@@ -2,10 +2,14 @@ import { IsBoolean, IsEmail, IsInt, IsNotEmpty, IsNumber, IsOptional, isString, 
 import { File } from "../entities";
 
 export class CreateLocationDto{
-
+    
+    @IsOptional()
     @IsString()
-    latitude: string;
-
+    latitude?: string;
+    
+    @IsOptional()
     @IsString()
-    altitude: string;
+    altitude?: string;
+
+    
 }

@@ -1,7 +1,8 @@
 import { IsBoolean, IsEmail, IsInt, IsNotEmpty, IsNumber, IsOptional, isString, IsString,MinLength, ValidateNested } from "class-validator";
-import { File,Location } from "../entities";
+import { File,Location, Prediction } from "../entities";
 import { Type } from "class-transformer";
 import { CreateFileDto,CreateLocationDto} from "./index";
+import { CreatePredictionDto } from "src/prediction/dto";
 export class CreateUserDto {
 
     @IsString()
@@ -34,8 +35,14 @@ export class CreateUserDto {
     @Type(()=>CreateFileDto)
     file: File;
 
+    @IsOptional()
     @ValidateNested({each:true})
     @Type(()=>CreateLocationDto)
-    location: Location;
+    location?: Location;
+
+    @IsOptional()
+    @ValidateNested({each:true})
+    @Type(()=>CreatePredictionDto)
+    prediction?: Prediction[];
 
 }
