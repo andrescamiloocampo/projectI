@@ -40,7 +40,9 @@ export class UserService {
 
   async create(createUserDto: CreateUserDto) {
     const { password, ...userData } = createUserDto;
-    const { file, location = {} , prediction = [] , ...rest } = userData;
+    const { file={}, location = {} , prediction = [] , ...rest } = userData;
+
+    console.log(createUserDto);
 
     try {
       // Creando y guardando File

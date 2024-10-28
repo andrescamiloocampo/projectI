@@ -8,7 +8,7 @@ export class File {
     @PrimaryGeneratedColumn('uuid')
     id: string;
 
-    @Column('text')
+    @Column({type:'text'})
     image: string;
 
     @OneToMany(
