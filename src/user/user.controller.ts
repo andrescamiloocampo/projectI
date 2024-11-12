@@ -40,9 +40,14 @@ export class UserController {
   }
 
   @Put(':id')
-  async updatePrediction(@Param('id') id:string){
-    
+  async updatePrediction(@Param('id') id:string){  
     return this.userService.addPrediction(id)
+  }
 
+  @UseGuards(AuthGuard)
+  @Get('/secure/:id')
+  async getUser(@Param('id') id:string){    
+    const user = await this.userService.findOneByUsernameGuard(id);        
+    return user;
   }
 }

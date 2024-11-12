@@ -6,8 +6,12 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { TestModule } from './test/test.module';
 import { UserModule } from './user/user.module';
 import { AuthModule } from './auth/auth.module';
-import { PredictionModule } from './prediction/prediction.module';
+import { PredictionModule } from './predictions/predictions.module';
 import { User,File,Location,Prediction } from './user/entities';
+import { ZoneModule } from './zone/zone.module';
+import { Zone } from './zone/entities/zone.entity';
+import { SeedModule } from './seed/seed.module';
+import { RouteModule } from './route/route.module';
 
 @Module({
   imports: [
@@ -21,11 +25,11 @@ import { User,File,Location,Prediction } from './user/entities';
       password: process.env.DB_PASSWORD,
       autoLoadEntities: true,
       synchronize: true,
-      entities: [User,File,Location,Prediction]      
+      entities: [User,File,Location,Prediction,Zone]      
     }),
     TestModule,    
     UserModule, 
-    AuthModule, PredictionModule
+    AuthModule, PredictionModule, ZoneModule, SeedModule, RouteModule
   ],
   controllers: [AppController],
   providers: [AppService],

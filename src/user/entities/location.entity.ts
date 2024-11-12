@@ -1,6 +1,6 @@
 import { Column, Entity, PrimaryGeneratedColumn, OneToOne, ManyToMany, ManyToOne, OneToMany } from "typeorm";
 import { User } from "./user.entity";
-import { Prediction } from "../../prediction/entities/prediction.entity";
+import { Predictions } from "../../predictions/entities/predictions.entity";
 
 
 @Entity()
@@ -23,12 +23,12 @@ export class Location {
       )
       user: User
 
-      @OneToMany(                             //TODO: should be OneToOne Relation
-        () => Prediction, 
-        prediction => prediction.location,
-        {cascade: false, eager: false}
-      )
-      prediction: Prediction
+      // @OneToMany(                             //TODO: should be OneToOne Relation
+      //   () => Predictions, 
+      //   prediction => prediction.location,
+      //   {cascade: false, eager: false}
+      // )
+      // prediction: Predictions
     
   
 }

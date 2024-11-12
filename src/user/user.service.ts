@@ -5,7 +5,6 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { CreateUserDto } from './dto/create-user.dto';
 import { v4 as uuid } from 'uuid';
 import * as bcrypt from 'bcrypt';
-import { CreateFileDto } from './dto';
 @Injectable()
 export class UserService {
 
@@ -35,6 +34,13 @@ export class UserService {
 
     //const { password, ...userResp } = user; // error 500 server error
     return user;
+  }
+
+  async findOneByUsernameGuard(id: string): Promise<any> {    
+    const user = await this.userRepository.findOneBy({id});        
+    if(!user) return null;
+    const {password,...rest} = user;
+    return rest;
   }
 
 

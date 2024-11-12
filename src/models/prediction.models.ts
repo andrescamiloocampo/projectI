@@ -1,10 +1,10 @@
 export enum WeatherE {
-    warm = "warm",
-    cold = "cold",
+    warm = 1,
+    cold = 2,
 }
 
 export enum ScheduleE{
-    morning = "morning",
-    afternoon = "afternoon",
-    night = "night",
+    morning = 1,
+    afternoon = 2,
+    night = 3,
 }

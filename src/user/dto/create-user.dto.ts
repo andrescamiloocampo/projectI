@@ -2,7 +2,7 @@ import { IsBoolean, IsEmail, IsInt, IsNotEmpty, IsNumber, IsOptional, isString, 
 import { File,Location, Prediction } from "../entities";
 import { Type } from "class-transformer";
 import { CreateFileDto,CreateLocationDto} from "./index";
-import { CreatePredictionDto } from "src/prediction/dto";
+import { CreatePredictionDto } from "src/predictions/dto";
 export class CreateUserDto {
 
     @IsString()
