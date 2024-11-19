@@ -51,8 +51,7 @@ export class User {
 
     @OneToMany(                     
       () => Predictions,
-      prediction => prediction.user,
-      {cascade: false, eager: false}
+      prediction => prediction.user      
     )
     prediction?: Predictions[]
 

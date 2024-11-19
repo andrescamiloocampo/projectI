@@ -1,17 +1,19 @@
-version: '3.8'   #afecta la conf de postgres
+version: '3.8'
 
 services:
   postgres:
     container_name: postgres_db
-    image: postgres:13.4  #14.3
+    image: postgres:15.9 
     restart: always
     ports:
       - "5432:5432"
     environment:
-      
-      POSTGRES_PASSWORD: ${DB_PASSWORD}
-      POSTGRES_DB: ${DB_NAME}
+      POSTGRES_PASSWORD: ${DB_PASSWORD:-default_password} 
+      POSTGRES_DB: ${DB_NAME:-default_db}                
     volumes:
-      # - ./data:/var/lib/postgresql/data   # cambio .postgres por .data
-      - ./postgres_win10:/var/lib/postgresql/data  # Windows 10
-      - ./postgres_win11:/var/lib/postgresql/data  # Windows 11
+      - ./postgres_data:/var/lib/postgresql/data 
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 10s
+      timeout: 5s
+      retries: 5

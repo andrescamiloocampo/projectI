@@ -2,8 +2,7 @@ import { Injectable, PreconditionFailedException } from '@nestjs/common';
 import { Predictions } from './entities/predictions.entity';
 import { InjectRepository, } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-import { CreatePredictionDto } from './dto';
-import { v4 as uuid } from 'uuid';
+
 @Injectable()
 export class PredictionService {
 
@@ -12,10 +11,14 @@ export class PredictionService {
     private readonly predictionRepository: Repository<Predictions>
   ) { }
 
-  async consumeModel() {
-    const data = await getPrediction();
-    return data;
-
+  async findAll(id: string) {
+    const query = `
+      SELECT * 
+      FROM predictions 
+      WHERE userid = $1
+    `;
+  
+    return await this.predictionRepository.query(query, [id]);
   }
 
   async prediction(body: any) {
@@ -24,26 +27,6 @@ export class PredictionService {
   }
 
 }
-
-const getPrediction = async (): Promise<any> => {
-  try {
-    const response = await fetch(
-      `${process.env.NEXT_PUBLIC_MODEL}/prediction`,
-      {
-        headers: {
-          'Content-Type': 'application/json',
-        }
-      },
-    );
-    if (!response.ok) {
-      throw new Error('No se pudo obtener la informacion');
-    }
-    const data = await response.json();
-    return data;
-  } catch (error) {
-    return { success: false, data: error };
-  }
-};
 
 const predictionPost = async (body: any): Promise<any> => {
   try {
