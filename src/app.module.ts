@@ -24,7 +24,7 @@ import { RouteModule } from './route/route.module';
       username: process.env.DB_USER,
       password: process.env.DB_PASSWORD,
       autoLoadEntities: true,
-      synchronize: false,
+      synchronize: true,
       entities: [User,File,Location,Prediction,Zone]      
     }),
     TestModule,    
