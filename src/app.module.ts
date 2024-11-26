@@ -26,7 +26,7 @@ import { RouteModule } from './route/route.module';
       url: process.env.NEXT_PUBLIC_DBCON,
       autoLoadEntities: true,
       ssl:true,
-      synchronize: true,
+      synchronize: false,
       entities: [User,File,Location,Prediction,Zone]      
     }),
     TestModule,    
