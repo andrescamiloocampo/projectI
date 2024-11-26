@@ -16,14 +16,16 @@ import { RouteModule } from './route/route.module';
 @Module({
   imports: [
     ConfigModule.forRoot(),
-    TypeOrmModule.forRoot({
+    TypeOrmModule.forRoot({            
       type: 'postgres',
-      host: process.env.DB_HOST,      
-      port: +process.env.DB_PORT,
-      database: process.env.DB_NAME,
-      username: process.env.DB_USER,
-      password: process.env.DB_PASSWORD,
+      // host: process.env.DB_HOST,      
+      // port: +process.env.DB_PORT,
+      // database: process.env.DB_NAME,
+      // username: process.env.DB_USER,
+      // password: process.env.DB_PASSWORD,
+      url: process.env.NEXT_PUBLIC_DBCON,
       autoLoadEntities: true,
+      ssl:true,
       synchronize: true,
       entities: [User,File,Location,Prediction,Zone]      
     }),
