@@ -15,5 +15,10 @@ export class RouteController {
   findAll() {
     return this.routeService.findAll();
   }
+
+  @Get('/concurrent')
+  findExternalRoutes(){
+    return this.routeService.getRoutes()
+  } 
     
 }

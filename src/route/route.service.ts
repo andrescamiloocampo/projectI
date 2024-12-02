@@ -43,4 +43,25 @@ export class RouteService {
       console.log(error);
     }
   }
+
+  async getRoutes(){
+    return await this.getRoutesInfo();
+  }
+
+  async getRoutesInfo(){
+    const headers = new Headers();
+    headers.append('Content-Type','application/json');
+
+    try {
+      const response = await fetch(`${process.env.BACKEND_JAVA}/concurrent`,{
+        method: 'GET',
+        headers
+      })
+      console.log(response);
+      if(!response.ok) return 'Error obteniendo la informacion';
+      return await response.json();
+    } catch (error) {
+      console.log(error);
+    }
+  }
 }
